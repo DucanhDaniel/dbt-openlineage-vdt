@@ -1,0 +1,38 @@
+# Environments
+.venv/
+.env
+
+# dbt
+target/
+dbt_packages/
+dbt_modules/
+logs/
+dbt.log
+edr_target/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+build/
+dist/
+*.egg-info/
+
+# Databases / Data
+*.duckdb
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

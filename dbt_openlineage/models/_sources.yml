@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+    - name: facebook
+      description: "Raw data from facebook and google"
+      schema: public
+      tables:
+        - name: fad_age_gender_detailed_report
+          description: "Raw facebook age gender detailed report data"
+        
+        - name: fad_location_detailed_report
+          description: "Raw facebook location detailed report data"
