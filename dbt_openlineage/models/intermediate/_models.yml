@@ -1,0 +1,41 @@
+version: 2
+
+models:
+    - name: int_fb_age_gender
+      description: "One row per ad daily, broken down by age and gender."
+      columns:
+
+        - name: created_at
+          description: "Timestamp of row creation"
+
+        - name: updated_at
+          description: "Timestamp of last update"
+
+        - name: date_start
+          description: "Metric start date"
+
+        - name: date_stop
+          description: "Metric end date"
+
+      tests:
+        - not_null_columns:
+            columns: ["created_at", "updated_at", "date_start", "date_stop", "ad_id"]
+
+    - name: int_fb_location
+      description: "One row per ad daily, broken down by location."
+      columns:
+        - name: created_at
+          description: "Timestamp of row creation"
+
+        - name: updated_at
+          description: "Timestamp of last update"
+
+        - name: date_start
+          description: "Metric start date"
+
+        - name: date_stop
+          description: "Metric end date"
+
+      tests:
+        - not_null_columns:
+            columns: ["created_at", "updated_at", "date_start", "date_stop", "ad_id"]

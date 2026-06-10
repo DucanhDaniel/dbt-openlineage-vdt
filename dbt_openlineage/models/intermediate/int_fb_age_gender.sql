@@ -1,22 +1,20 @@
+-- calculate more metrics for analysis
 select
-    -- Ad metadata
-    user_id,
-
-    -- Time
-    "createdAt" as created_at,
-    "updatedAt" as updated_at,
+    created_at,
+    updated_at,
     date_start,
     date_stop,
     account_id,
     account_name,
-    id as ad_id,
+    ad_id,
     ad_name,
     creative_id,
     creative_name,
+    creative_link,
 
-    -- location breakdown
-    country,
-    region,
+    -- age gender breakdowns
+    age,
+    gender,
 
     -- metrics
     coalesce(spend, 0) as spend,
@@ -25,6 +23,9 @@ select
     coalesce(clicks, 0) as clicks,
     coalesce(cpc, 0) as cpc,
     coalesce(cpm, 0) as cpm,
-    coalesce(frequency, 0) as frequency
+    coalesce(frequency, 0) as frequency,
 
-from {{ source("facebook", "fad_location_detailed_report") }}
+    -- calculate more metrics
+    coalesce((1.0 * clicks / nullif(impressions, 0)) * 100, 0) as ctr
+
+from {{ ref("stg_fb_age_gender") }}
