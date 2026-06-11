@@ -25,7 +25,13 @@ with
 
     deduped as (
         select
-            *,
+            ad_id,
+            ad_name,
+            account_id,
+            account_name,
+            creative_id,
+            creative_name,
+            creative_link,
             row_number() over (
                 partition by ad_id order by creative_link desc nulls last
             ) as rn

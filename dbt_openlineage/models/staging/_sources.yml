@@ -7,6 +7,49 @@ sources:
       tables:
         - name: fad_age_gender_detailed_report
           description: "Raw facebook age gender detailed report data"
+          columns:
+            - name: user_id
+            - name: '"createdAt"'
+            - name: '"updatedAt"'
+            - name: date_start
+            - name: date_stop
+            - name: account_id
+            - name: account_name
+            - name: id
+            - name: name
+            - name: creative_id
+            - name: creative_name
+            - name: creative_link
+            - name: age
+            - name: gender
+            - name: spend
+            - name: impressions
+            - name: reach
+            - name: clicks
+            - name: cpc
+            - name: cpm
+            - name: frequency
         
         - name: fad_location_detailed_report
           description: "Raw facebook location detailed report data"
+          columns:
+            - name: user_id
+            - name: '"createdAt"'
+            - name: '"updatedAt"'
+            - name: date_start
+            - name: date_stop
+            - name: account_id
+            - name: account_name
+            - name: id
+            - name: ad_name
+            - name: creative_id
+            - name: creative_name
+            - name: country
+            - name: region
+            - name: spend
+            - name: impressions
+            - name: reach
+            - name: clicks
+            - name: cpc
+            - name: cpm
+            - name: frequency

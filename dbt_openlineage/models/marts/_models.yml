@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: dim_ads
+    description: "Dimension table for ads"
+    columns:
+      - name: ad_id
+      - name: ad_name
+      - name: account_id
+      - name: account_name
+      - name: creative_id
+      - name: creative_name
+      - name: creative_link
+
+  - name: dim_date
+    description: "Dimension table for dates"
+    columns:
+      - name: metric_date
+      - name: date_year
+      - name: date_month
+      - name: date_quarter
+      - name: date_day_of_month
+      - name: date_day_of_week
+      - name: date_year_month
+      - name: date_day_name
+      - name: date_month_name
+
+  - name: fact_ads_age_gender
+    description: "Fact table for ads broken down by age and gender"
+    columns:
+      - name: metric_date
+      - name: ad_id
+      - name: age
+      - name: gender
+      - name: spend
+      - name: impressions
+      - name: reach
+      - name: clicks
+      - name: cpc
+      - name: cpm
+      - name: frequency
+      - name: ctr
+
+  - name: fact_ads_location
+    description: "Fact table for ads broken down by location"
+    columns:
+      - name: metric_date
+      - name: ad_id
+      - name: country
+      - name: region
+      - name: spend
+      - name: impressions
+      - name: reach
+      - name: clicks
+      - name: cpc
+      - name: cpm
+      - name: frequency
+      - name: ctr

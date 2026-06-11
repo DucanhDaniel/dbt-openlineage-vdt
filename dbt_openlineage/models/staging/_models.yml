@@ -19,6 +19,23 @@ models:
         - name: date_stop
           description: "Metric end date"
 
+        - name: account_id
+        - name: account_name
+        - name: ad_id
+        - name: ad_name
+        - name: creative_id
+        - name: creative_name
+        - name: creative_link
+        - name: age
+        - name: gender
+        - name: spend
+        - name: impressions
+        - name: reach
+        - name: clicks
+        - name: cpc
+        - name: cpm
+        - name: frequency
+
       tests:
         - not_null_columns:
             columns: ["user_id", "created_at", "updated_at", "date_start", "date_stop", "ad_id"]
@@ -40,6 +57,22 @@ models:
 
         - name: date_stop
           description: "Metric end date"
+
+        - name: account_id
+        - name: account_name
+        - name: ad_id
+        - name: ad_name
+        - name: creative_id
+        - name: creative_name
+        - name: country
+        - name: region
+        - name: spend
+        - name: impressions
+        - name: reach
+        - name: clicks
+        - name: cpc
+        - name: cpm
+        - name: frequency
 
       tests:
         - not_null_columns:
