@@ -15,7 +15,7 @@ profile_config = ProfileConfig(
     target_name="dev",
     profile_mapping=PostgresUserPasswordProfileMapping(
         conn_id="postgres_default", # This is the Airflow connection ID we will create
-        profile_args={"schema": "public"}
+        profile_args={"schema": "analytics"}
     )
 )
 
@@ -32,10 +32,6 @@ with DAG(
         group_id="dbt_transform",
         project_config=ProjectConfig(DBT_PROJECT_PATH),
         profile_config=profile_config,
-        execution_config=ExecutionConfig(
-            # Tells Cosmos to run the dbt command via dbt-ol (OpenLineage wrapper)
-            dbt_executable_path="dbt-ol",
-        ),
         operator_args={
             "install_deps": True, # Automatically runs `dbt deps` before running
         }
