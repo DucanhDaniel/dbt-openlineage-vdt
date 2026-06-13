@@ -5,6 +5,9 @@
 name: 'dbt_openlineage'
 version: '1.0.0'
 
+flags:
+  indirect_selection: buildable
+
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_openlineage'
 
