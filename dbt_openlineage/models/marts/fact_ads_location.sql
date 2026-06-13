@@ -26,5 +26,5 @@ select
 from {{ ref("int_fb_location") }}
 
 {% if is_incremental() %}
-    where updated_at >= (select coalesce(max(updated_at), '1900-01-01') from {{ this }})
+    where updated_at >= (select coalesce(max(tgt.updated_at), '1900-01-01') from {{ this }} tgt)
 {% endif %}
