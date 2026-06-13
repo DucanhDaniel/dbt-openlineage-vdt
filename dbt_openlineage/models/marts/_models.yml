@@ -100,3 +100,8 @@ models:
       - name: cpm
       - name: frequency
       - name: ctr
+    tests:
+      - not_null_columns:
+          columns: ["metric_date", "ad_id", "country", "region"]
+      - unique_columns:
+          columns: ["metric_date", "ad_id", "country", "region"]
