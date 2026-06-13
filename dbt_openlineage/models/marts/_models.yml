@@ -11,6 +11,11 @@ models:
       - name: creative_id
       - name: creative_name
       - name: creative_link
+    tests:
+      - not_null_columns:
+          columns: ["ad_id", "ad_name", "account_id", "account_name"]
+      - unique_columns:
+          columns: ["ad_id"]
 
   - name: dim_date
     description: "Dimension table for dates"
@@ -24,14 +29,37 @@ models:
       - name: date_year_month
       - name: date_day_name
       - name: date_month_name
+    tests:
+      - not_null_columns:
+          columns: ["metric_date", "date_year", "date_month", "date_quarter", "date_day_of_month", "date_day_of_week", "date_year_month", "date_day_name", "date_month_name"]
+      - unique_columns:
+          columns: ["metric_date"]
 
   - name: fact_ads_age_gender
     description: "Fact table for ads broken down by age and gender"
     columns:
       - name: metric_date
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: metric_date  
       - name: ad_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_ads')
+                field: ad_id
       - name: age
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["45-54", "25-34", "18-24", "35-44", "45-54", "55-64", "65+", "Unknown"]
       - name: gender
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["male", "female", "unknown"]
       - name: spend
       - name: impressions
       - name: reach
@@ -40,12 +68,28 @@ models:
       - name: cpm
       - name: frequency
       - name: ctr
+    tests:
+      - not_null_columns:
+          columns: ["metric_date", "ad_id", "age", "gender"]
+      - unique_columns:
+          columns: ["metric_date", "ad_id", "age", "gender"]
+    
 
   - name: fact_ads_location
     description: "Fact table for ads broken down by location"
     columns:
       - name: metric_date
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: metric_date  
       - name: ad_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_ads')
+                field: ad_id
       - name: country
       - name: region
       - name: spend
