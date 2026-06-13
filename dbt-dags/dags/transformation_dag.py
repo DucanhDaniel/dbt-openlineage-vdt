@@ -22,7 +22,7 @@ profile_config = ProfileConfig(
 with DAG(
     dag_id="dbt_transformation_dag",
     start_date=datetime(2024, 1, 1),
-    schedule="@daily",
+    schedule="*/5 * * * *",
     catchup=False,
     tags=["dbt", "openlineage"],
 ) as dag:

@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized="incremental",
+        unique_key=["metric_date", "ad_id", "country", "region"],
+        incremental_strategy="merge",
+    )
+}}
+
 select
     -- foreign keys / dimensions
     date_start as metric_date,
@@ -16,3 +24,7 @@ select
     ctr
 
 from {{ ref("int_fb_location") }}
+
+{% if is_incremental() %}
+    where updated_at >= (select coalesce(max(updated_at), '1900-01-01') from {{ this }})
+{% endif %}
