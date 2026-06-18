@@ -5,12 +5,19 @@ models:
     description: "Dimension table for ads"
     columns:
       - name: ad_id
+        data_type: text
       - name: ad_name
+        data_type: text
       - name: account_id
+        data_type: text
       - name: account_name
+        data_type: text
       - name: creative_id
+        data_type: text
       - name: creative_name
+        data_type: text
       - name: creative_link
+        data_type: text
     tests:
       - not_null_columns:
           columns: ["ad_id", "ad_name", "account_id", "account_name"]
@@ -21,14 +28,23 @@ models:
     description: "Dimension table for dates"
     columns:
       - name: metric_date
+        data_type: date
       - name: date_year
+        data_type: numeric
       - name: date_month
+        data_type: numeric
       - name: date_quarter
+        data_type: numeric
       - name: date_day_of_month
+        data_type: numeric
       - name: date_day_of_week
+        data_type: numeric
       - name: date_year_month
+        data_type: text
       - name: date_day_name
+        data_type: text
       - name: date_month_name
+        data_type: text
     tests:
       - not_null_columns:
           columns: ["metric_date", "date_year", "date_month", "date_quarter", "date_day_of_month", "date_day_of_week", "date_year_month", "date_day_name", "date_month_name"]
@@ -39,35 +55,49 @@ models:
     description: "Fact table for ads broken down by age and gender"
     columns:
       - name: metric_date
+        data_type: timestamp
         tests:
           - relationships:
               arguments:
                 to: ref('dim_date')
                 field: metric_date  
       - name: ad_id
+        data_type: text
         tests:
           - relationships:
               arguments:
                 to: ref('dim_ads')
                 field: ad_id
       - name: age
+        data_type: text
         tests:
           - accepted_values:
               arguments:
                 values: ["45-54", "25-34", "18-24", "35-44", "45-54", "55-64", "65+", "Unknown"]
       - name: gender
+        data_type: text
         tests:
           - accepted_values:
               arguments:
                 values: ["male", "female", "unknown"]
+               # values: ["MALE", "FEMALE", "UNKNOWN"]
+              
       - name: spend
+        data_type: double precision
       - name: impressions
+        data_type: integer
       - name: reach
+        data_type: integer
       - name: clicks
+        data_type: integer
       - name: cpc
+        data_type: double precision
       - name: cpm
+        data_type: double precision
       - name: frequency
+        data_type: double precision
       - name: ctr
+        data_type: numeric
     tests:
       - not_null_columns:
           columns: ["metric_date", "ad_id", "age", "gender"]
@@ -79,27 +109,39 @@ models:
     description: "Fact table for ads broken down by location"
     columns:
       - name: metric_date
+        data_type: timestamp
         tests:
           - relationships:
               arguments:
                 to: ref('dim_date')
                 field: metric_date  
       - name: ad_id
+        data_type: text
         tests:
           - relationships:
               arguments:
                 to: ref('dim_ads')
                 field: ad_id
       - name: country
+        data_type: text
       - name: region
+        data_type: text
       - name: spend
+        data_type: double precision
       - name: impressions
+        data_type: integer
       - name: reach
+        data_type: integer
       - name: clicks
+        data_type: integer
       - name: cpc
+        data_type: double precision
       - name: cpm
+        data_type: double precision
       - name: frequency
+        data_type: double precision
       - name: ctr
+        data_type: numeric
     tests:
       - not_null_columns:
           columns: ["metric_date", "ad_id", "country", "region"]
