@@ -9,47 +9,88 @@ sources:
           description: "Raw facebook age gender detailed report data"
           columns:
             - name: user_id
+              data_type: text
             - name: '"createdAt"'
+              data_type: timestamp
             - name: '"updatedAt"'
+              data_type: timestamp
             - name: date_start
+              data_type: timestamp
             - name: date_stop
+              data_type: timestamp
             - name: account_id
+              data_type: text
             - name: account_name
+              data_type: text
             - name: id
+              data_type: text
             - name: name
+              data_type: text
             - name: creative_id
+              data_type: text
             - name: creative_name
+              data_type: text
             - name: creative_link
+              data_type: text
             - name: age
+              data_type: text
             - name: gender
+              data_type: text
             - name: spend
+              data_type: double precision
             - name: impressions
+              data_type: integer
             - name: reach
+              data_type: integer
             - name: clicks
+              data_type: integer
             - name: cpc
+              data_type: double precision
             - name: cpm
+              data_type: double precision
             - name: frequency
+              data_type: double precision
         
         - name: fad_location_detailed_report
           description: "Raw facebook location detailed report data"
           columns:
             - name: user_id
+              data_type: text
             - name: '"createdAt"'
+              data_type: timestamp
             - name: '"updatedAt"'
+              data_type: timestamp
             - name: date_start
+              data_type: timestamp
             - name: date_stop
+              data_type: timestamp
             - name: account_id
+              data_type: text
             - name: account_name
+              data_type: text
             - name: id
+              data_type: text
             - name: ad_name
+              data_type: text
             - name: creative_id
+              data_type: text
             - name: creative_name
+              data_type: text
             - name: country
+              data_type: text
             - name: region
+              data_type: text
             - name: spend
+              data_type: double precision
             - name: impressions
+              data_type: integer
             - name: reach
+              data_type: integer
             - name: clicks
+              data_type: integer
             - name: cpc
+              data_type: double precision
             - name: cpm
+              data_type: double precision
             - name: frequency
+              data_type: double precision

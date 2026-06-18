@@ -28,4 +28,5 @@ select
     -- calculate more metrics
     coalesce((1.0 * clicks / nullif(impressions, 0)) * 100, 0) as ctr
 
+{# 1 / 0 as error_column #}
 from {{ ref("stg_fb_age_gender") }}

@@ -22,8 +22,9 @@ profile_config = ProfileConfig(
 with DAG(
     dag_id="dbt_transformation_dag",
     start_date=datetime(2024, 1, 1),
-    schedule="*/5 * * * *",
+    schedule="@hourly",
     catchup=False,
+    max_active_runs=1,
     tags=["dbt", "openlineage"],
 ) as dag:
 
@@ -34,6 +35,7 @@ with DAG(
         profile_config=profile_config,
         operator_args={
             "install_deps": True, # Automatically runs `dbt deps` before running
+            "dbt_executable_path": "dbt-ol",
         }
     )
 

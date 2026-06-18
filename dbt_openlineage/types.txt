@@ -1,0 +1,126 @@
+dim_ads | ad_id | text
+dim_ads | ad_name | text
+dim_ads | account_id | text
+dim_ads | account_name | text
+dim_ads | creative_id | text
+dim_ads | creative_name | text
+dim_ads | creative_link | text
+dim_date | metric_date | date
+dim_date | date_year | numeric
+dim_date | date_month | numeric
+dim_date | date_quarter | numeric
+dim_date | date_day_of_month | numeric
+dim_date | date_day_of_week | numeric
+dim_date | date_year_month | text
+dim_date | date_day_name | text
+dim_date | date_month_name | text
+fact_ads_age_gender | metric_date | timestamp without time zone
+fact_ads_age_gender | updated_at | timestamp without time zone
+fact_ads_age_gender | ad_id | text
+fact_ads_age_gender | age | text
+fact_ads_age_gender | gender | text
+fact_ads_age_gender | spend | double precision
+fact_ads_age_gender | impressions | integer
+fact_ads_age_gender | reach | integer
+fact_ads_age_gender | clicks | integer
+fact_ads_age_gender | cpc | double precision
+fact_ads_age_gender | cpm | double precision
+fact_ads_age_gender | frequency | double precision
+fact_ads_age_gender | ctr | numeric
+fact_ads_location | updated_at | timestamp without time zone
+fact_ads_location | metric_date | timestamp without time zone
+fact_ads_location | ad_id | text
+fact_ads_location | country | text
+fact_ads_location | region | text
+fact_ads_location | spend | double precision
+fact_ads_location | impressions | integer
+fact_ads_location | reach | integer
+fact_ads_location | clicks | integer
+fact_ads_location | cpc | double precision
+fact_ads_location | cpm | double precision
+fact_ads_location | frequency | double precision
+fact_ads_location | ctr | numeric
+int_fb_age_gender | created_at | timestamp without time zone
+int_fb_age_gender | updated_at | timestamp without time zone
+int_fb_age_gender | date_start | timestamp without time zone
+int_fb_age_gender | date_stop | timestamp without time zone
+int_fb_age_gender | account_id | text
+int_fb_age_gender | account_name | text
+int_fb_age_gender | ad_id | text
+int_fb_age_gender | ad_name | text
+int_fb_age_gender | creative_id | text
+int_fb_age_gender | creative_name | text
+int_fb_age_gender | creative_link | text
+int_fb_age_gender | age | text
+int_fb_age_gender | gender | text
+int_fb_age_gender | spend | double precision
+int_fb_age_gender | impressions | integer
+int_fb_age_gender | reach | integer
+int_fb_age_gender | clicks | integer
+int_fb_age_gender | cpc | double precision
+int_fb_age_gender | cpm | double precision
+int_fb_age_gender | frequency | double precision
+int_fb_age_gender | ctr | numeric
+int_fb_location | created_at | timestamp without time zone
+int_fb_location | updated_at | timestamp without time zone
+int_fb_location | date_start | timestamp without time zone
+int_fb_location | date_stop | timestamp without time zone
+int_fb_location | account_id | text
+int_fb_location | account_name | text
+int_fb_location | ad_id | text
+int_fb_location | ad_name | text
+int_fb_location | creative_id | text
+int_fb_location | creative_name | text
+int_fb_location | country | text
+int_fb_location | region | text
+int_fb_location | spend | double precision
+int_fb_location | impressions | integer
+int_fb_location | reach | integer
+int_fb_location | clicks | integer
+int_fb_location | cpc | double precision
+int_fb_location | cpm | double precision
+int_fb_location | frequency | double precision
+int_fb_location | ctr | numeric
+province_normalization | original_province | text
+province_normalization | standardized_province | text
+stg_fb_age_gender | user_id | text
+stg_fb_age_gender | created_at | timestamp without time zone
+stg_fb_age_gender | updated_at | timestamp without time zone
+stg_fb_age_gender | date_start | timestamp without time zone
+stg_fb_age_gender | date_stop | timestamp without time zone
+stg_fb_age_gender | account_id | text
+stg_fb_age_gender | account_name | text
+stg_fb_age_gender | ad_id | text
+stg_fb_age_gender | ad_name | text
+stg_fb_age_gender | creative_id | text
+stg_fb_age_gender | creative_name | text
+stg_fb_age_gender | creative_link | text
+stg_fb_age_gender | age | text
+stg_fb_age_gender | gender | text
+stg_fb_age_gender | spend | double precision
+stg_fb_age_gender | impressions | integer
+stg_fb_age_gender | reach | integer
+stg_fb_age_gender | clicks | integer
+stg_fb_age_gender | cpc | double precision
+stg_fb_age_gender | cpm | double precision
+stg_fb_age_gender | frequency | double precision
+stg_fb_location | user_id | text
+stg_fb_location | created_at | timestamp without time zone
+stg_fb_location | updated_at | timestamp without time zone
+stg_fb_location | date_start | timestamp without time zone
+stg_fb_location | date_stop | timestamp without time zone
+stg_fb_location | account_id | text
+stg_fb_location | account_name | text
+stg_fb_location | ad_id | text
+stg_fb_location | ad_name | text
+stg_fb_location | creative_id | text
+stg_fb_location | creative_name | text
+stg_fb_location | country | text
+stg_fb_location | region | text
+stg_fb_location | spend | double precision
+stg_fb_location | impressions | integer
+stg_fb_location | reach | integer
+stg_fb_location | clicks | integer
+stg_fb_location | cpc | double precision
+stg_fb_location | cpm | double precision
+stg_fb_location | frequency | double precision
