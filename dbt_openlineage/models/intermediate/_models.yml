@@ -59,7 +59,7 @@ models:
           data_type: text
           tests:
             - not_null
-            # - unique
+            
         - name: supplier_name
           data_type: text
         - name: cost
