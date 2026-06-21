@@ -1,128 +1,121 @@
 version: 2
 
 models:
-    - name: stg_fb_age_gender
-      description: "One row per ad daily, broken down by age and gender."
+    - name: stg_customers
+      description: "Staged customer data from jaffle shop."
       columns:
-        - name: user_id
+        - name: customer_id
           data_type: text
-          description: "User id, whom created this row"
+          description: "Primary key for customer."
+          tests:
+            - unique
+            - not_null
+        - name: customer_name
+          data_type: text
+          description: "Customer name."
 
-        - name: created_at
-          data_type: timestamp
-          description: "Timestamp of row creation"
-
-        - name: updated_at
-          data_type: timestamp
-          description: "Timestamp of last update"
-
-        - name: date_start
-          data_type: timestamp
-          description: "Metric start date"
-
-        - name: date_stop
-          data_type: timestamp
-          description: "Metric end date"
-
-        - name: account_id
-          data_type: text
-        - name: account_name
-          data_type: text
-        - name: ad_id
-          data_type: text
-        - name: ad_name
-          data_type: text
-        - name: creative_id
-          data_type: text
-        - name: creative_name
-          data_type: text
-        - name: creative_link
-          data_type: text
-        - name: age
-          data_type: text
-        - name: gender
-          data_type: text
-        - name: spend
-          data_type: double precision
-        - name: impressions
-          data_type: integer
-        - name: reach
-          data_type: integer
-        - name: clicks
-          data_type: integer
-        - name: cpc
-          data_type: double precision
-        - name: cpm
-          data_type: double precision
-        - name: frequency
-          data_type: double precision
-
-      tests:
-        - not_null_columns:
-            columns: ["user_id", "created_at", "updated_at", "date_start", "date_stop", "ad_id"]
-
-    - name: stg_fb_location
-      description: "One row per ad daily, broken down by location."
+    - name: stg_stores
+      description: "Staged store locations data."
       columns:
-        - name: user_id
+        - name: store_id
           data_type: text
-          description: "User id, whom created this row"
-
-        - name: created_at
+          description: "Primary key for store."
+          tests:
+            - unique
+            - not_null
+        - name: store_name
+          data_type: text
+          description: "Store name."
+        - name: opened_at
           data_type: timestamp
-          description: "Timestamp of row creation"
-
-        - name: updated_at
-          data_type: timestamp
-          description: "Timestamp of last update"
-
-        - name: date_start
-          data_type: timestamp
-          description: "Metric start date"
-
-        - name: date_stop
-          data_type: timestamp
-          description: "Metric end date"
-
-        - name: account_id
-          data_type: text
-        - name: account_name
-          data_type: text
-        - name: ad_id
-          data_type: text
-        - name: ad_name
-          data_type: text
-        - name: creative_id
-          data_type: text
-        - name: creative_name
-          data_type: text
-        - name: country
-          data_type: text
-        - name: region
-          data_type: text
-        - name: spend
+          description: "Store opening timestamp."
+        - name: tax_rate
           data_type: double precision
-        - name: impressions
-          data_type: integer
-        - name: reach
-          data_type: integer
-        - name: clicks
-          data_type: integer
-        - name: cpc
-          data_type: double precision
-        - name: cpm
-          data_type: double precision
-        - name: frequency
-          data_type: double precision
+          description: "Store tax rate."
 
-      tests:
-        - not_null_columns:
-            columns: ["user_id", "created_at", "updated_at", "date_start", "date_stop", "ad_id"]
-
-    - name: stg_province_normalization
-      description: "Staging model for province_normalization seed to ensure OpenLineage captures it correctly"
+    - name: stg_orders
+      description: "Staged orders data."
       columns:
-        - name: original_province
+        - name: order_id
           data_type: text
-        - name: standardized_province
+          description: "Primary key for order."
+          tests:
+            - unique
+            - not_null
+        - name: customer_id
           data_type: text
+          description: "Foreign key to customer."
+        - name: ordered_at
+          data_type: timestamp
+          description: "Order timestamp."
+        - name: store_id
+          data_type: text
+          description: "Foreign key to store."
+        - name: subtotal
+          data_type: integer
+          description: "Order subtotal before tax."
+        - name: tax_paid
+          data_type: integer
+          description: "Amount of tax paid for the order."
+        - name: order_total
+          data_type: integer
+          description: "Total amount paid for the order."
+
+    - name: stg_items
+      description: "Staged order items data."
+      columns:
+        - name: item_id
+          data_type: text
+          description: "Primary key for item."
+          tests:
+            - unique
+            - not_null
+        - name: order_id
+          data_type: text
+          description: "Foreign key to order."
+        - name: product_id
+          data_type: text
+          description: "Foreign key to product."
+
+    - name: stg_products
+      description: "Staged products data."
+      columns:
+        - name: product_id
+          data_type: text
+          description: "Primary key for product."
+          tests:
+            - unique
+            - not_null
+        - name: product_name
+          data_type: text
+          description: "Product name."
+        - name: type
+          data_type: text
+          description: "Product type."
+        - name: price
+          data_type: integer
+          description: "Product price."
+        - name: description
+          data_type: text
+          description: "Product description."
+
+    - name: stg_supplies
+      description: "Staged supplies data."
+      columns:
+        - name: supplier_id
+          data_type: text
+          description: "Primary key for supply."
+          tests:
+            - not_null
+        - name: supplier_name
+          data_type: text
+          description: "Supplier name."
+        - name: cost
+          data_type: integer
+          description: "Supply cost."
+        - name: perishable
+          data_type: boolean
+          description: "Is perishable."
+        - name: product_id
+          data_type: text
+          description: "Associated product ID."

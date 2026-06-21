@@ -1,117 +1,72 @@
 version: 2
 
 models:
-    - name: int_fb_age_gender
-      description: "One row per ad daily, broken down by age and gender."
+    - name: int_customers
+      description: "Intermediate customer model."
       columns:
+        - name: customer_id
+          data_type: text
+          tests:
+            - unique
+            - not_null
+        - name: customer_name
+          data_type: text
 
-        - name: created_at
-          data_type: timestamp
-          description: "Timestamp of row creation"
-
-        - name: updated_at
-          data_type: timestamp
-          description: "Timestamp of last update"
-
-        - name: date_start
-          data_type: timestamp
-          description: "Metric start date"
-
-        - name: date_stop
-          data_type: timestamp
-          description: "Metric end date"
-
-        - name: account_id
-          data_type: text
-        - name: account_name
-          data_type: text
-        - name: ad_id
-          data_type: text
-        - name: ad_name
-          data_type: text
-        - name: creative_id
-          data_type: text
-        - name: creative_name
-          data_type: text
-        - name: creative_link
-          data_type: text
-        - name: age
-          data_type: text
-        - name: gender
-          data_type: text
-        - name: spend
-          data_type: double precision
-        - name: impressions
-          data_type: integer
-        - name: reach
-          data_type: integer
-        - name: clicks
-          data_type: integer
-        - name: cpc
-          data_type: double precision
-        - name: cpm
-          data_type: double precision
-        - name: frequency
-          data_type: double precision
-        - name: ctr
-          data_type: numeric
-
-      tests:
-        - not_null_columns:
-            columns: ["created_at", "updated_at", "date_start", "date_stop", "ad_id"]
-
-    - name: int_fb_location
-      description: "One row per ad daily, broken down by location."
+    - name: int_stores
+      description: "Intermediate store model."
       columns:
-        - name: created_at
+        - name: store_id
+          data_type: text
+          tests:
+            - unique
+            - not_null
+        - name: store_name
+          data_type: text
+        - name: opened_at
           data_type: timestamp
-          description: "Timestamp of row creation"
-
-        - name: updated_at
-          data_type: timestamp
-          description: "Timestamp of last update"
-
-        - name: date_start
-          data_type: timestamp
-          description: "Metric start date"
-
-        - name: date_stop
-          data_type: timestamp
-          description: "Metric end date"
-
-        - name: account_id
-          data_type: text
-        - name: account_name
-          data_type: text
-        - name: ad_id
-          data_type: text
-        - name: ad_name
-          data_type: text
-        - name: creative_id
-          data_type: text
-        - name: creative_name
-          data_type: text
-        - name: country
-          data_type: text
-        - name: region
-          data_type: text
-        - name: spend
+        - name: tax_rate
           data_type: double precision
-        - name: impressions
+
+    - name: int_order_product
+      description: "Intermediate model joining orders, items, and products."
+      columns:
+        - name: order_id
+          data_type: text
+        - name: customer_id
+          data_type: text
+        - name: ordered_at
+          data_type: timestamp
+        - name: store_id
+          data_type: text
+        - name: subtotal
           data_type: integer
-        - name: reach
+        - name: tax_paid
           data_type: integer
-        - name: clicks
+        - name: total
           data_type: integer
-        - name: cpc
-          data_type: double precision
-        - name: cpm
-          data_type: double precision
-        - name: frequency
-          data_type: double precision
-        - name: ctr
-          data_type: numeric
+        - name: product_id
+          data_type: text
+        - name: item_id
+          data_type: text
+          tests:
+            - unique
+            - not_null
 
-      tests:
-        - not_null_columns:
-            columns: ["created_at", "updated_at", "date_start", "date_stop", "ad_id"]
+    - name: int_supplies
+      description: "Intermediate supplies model."
+      columns:
+        - name: supplier_id
+          data_type: text
+          tests:
+            - not_null
+            
+        - name: supplier_name
+          data_type: text
+        - name: cost
+          tests:
+            - not_null
+          data_type: integer
+        - name: perishable
+          data_type: boolean
+        - name: product_id
+          data_type: text

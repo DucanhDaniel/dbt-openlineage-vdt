@@ -1,96 +1,109 @@
 version: 2
 
 sources:
-    - name: facebook
-      description: "Raw data from facebook and google"
-      schema: public
+    - name: jaffle
+      description: This is a raw database from the Jaffle Shop app. It contains core transaction information including customers and orders.
+      database: opendb
+      schema: analytics
       tables:
-        - name: fad_age_gender_detailed_report
-          description: "Raw facebook age gender detailed report data"
+        - name: raw_customers
+          description: "Stores basic personal information of users/customers who have registered accounts."
           columns:
-            - name: user_id
-              data_type: text
-            - name: '"createdAt"'
-              data_type: timestamp
-            - name: '"updatedAt"'
-              data_type: timestamp
-            - name: date_start
-              data_type: timestamp
-            - name: date_stop
-              data_type: timestamp
-            - name: account_id
-              data_type: text
-            - name: account_name
-              data_type: text
             - name: id
               data_type: text
+              description: "Primary key. A unique identifier for each customer."
             - name: name
               data_type: text
-            - name: creative_id
-              data_type: text
-            - name: creative_name
-              data_type: text
-            - name: creative_link
-              data_type: text
-            - name: age
-              data_type: text
-            - name: gender
-              data_type: text
-            - name: spend
-              data_type: double precision
-            - name: impressions
-              data_type: integer
-            - name: reach
-              data_type: integer
-            - name: clicks
-              data_type: integer
-            - name: cpc
-              data_type: double precision
-            - name: cpm
-              data_type: double precision
-            - name: frequency
-              data_type: double precision
-        
-        - name: fad_location_detailed_report
-          description: "Raw facebook location detailed report data"
+              description: "Name of the customer."
+
+        - name: raw_stores
+          description: "Stores information about physical store locations."
           columns:
-            - name: user_id
-              data_type: text
-            - name: '"createdAt"'
-              data_type: timestamp
-            - name: '"updatedAt"'
-              data_type: timestamp
-            - name: date_start
-              data_type: timestamp
-            - name: date_stop
-              data_type: timestamp
-            - name: account_id
-              data_type: text
-            - name: account_name
-              data_type: text
             - name: id
               data_type: text
-            - name: ad_name
+              description: "Primary key. Unique identifier for the store."
+            - name: name
               data_type: text
-            - name: creative_id
-              data_type: text
-            - name: creative_name
-              data_type: text
-            - name: country
-              data_type: text
-            - name: region
-              data_type: text
-            - name: spend
+              description: "Name of the store."
+            - name: opened_at
+              data_type: timestamp
+              description: "Timestamp when the store was opened."
+            - name: tax_rate
               data_type: double precision
-            - name: impressions
+              description: "Tax rate applied at this store location."
+
+        - name: raw_orders
+          description: "Stores order records placed by customers at specific stores."
+          columns:
+            - name: id
+              data_type: text
+              description: "Primary key. Unique identifier for the order."
+            - name: customer
+              data_type: text
+              description: "Foreign key linking to the customer who placed the order."
+            - name: ordered_at
+              data_type: timestamp
+              description: "Timestamp when the order was placed."
+            - name: store_id
+              data_type: text
+              description: "Foreign key linking to the store where the order was placed."
+            - name: subtotal
               data_type: integer
-            - name: reach
+              description: "Order subtotal before tax."
+            - name: tax_paid
               data_type: integer
-            - name: clicks
+              description: "Amount of tax paid for the order."
+            - name: order_total
               data_type: integer
-            - name: cpc
-              data_type: double precision
-            - name: cpm
-              data_type: double precision
-            - name: frequency
-              data_type: double precision
+              description: "Total amount paid for the order."
+
+        - name: raw_items
+          description: "Stores individual items included in each order."
+          columns:
+            - name: id
+              data_type: text
+              description: "Primary key. Unique identifier for the order item."
+            - name: order_id
+              data_type: text
+              description: "Foreign key linking to the order."
+            - name: sku
+              data_type: text
+              description: "Stock Keeping Unit (SKU) identifying the product."
+
+        - name: raw_products
+          description: "Stores information about the products available for sale."
+          columns:
+            - name: sku
+              data_type: text
+              description: "Primary key. Stock Keeping Unit (SKU) for the product."
+            - name: name
+              data_type: text
+              description: "Name of the product."
+            - name: type
+              data_type: text
+              description: "Type or category of the product."
+            - name: price
+              data_type: integer
+              description: "Price of the product."
+            - name: description
+              data_type: text
+              description: "Detailed description of the product."
+
+        - name: raw_supplies
+          description: "Stores information about supplies needed for products."
+          columns:
+            - name: id
+              data_type: text
+              description: "Primary key. Unique identifier for the supply item."
+            - name: name
+              data_type: text
+              description: "Name of the supply item."
+            - name: cost
+              data_type: integer
+              description: "Cost of the supply item."
+            - name: perishable
+              data_type: boolean
+              description: "Boolean indicating if the supply item is perishable."
+            - name: sku
+              data_type: text
+              description: "SKU of the product this supply is used for."
