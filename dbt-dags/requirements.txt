@@ -4,3 +4,4 @@ astronomer-cosmos
 dbt-postgres
 openlineage-dbt
 apache-airflow-providers-openlineage
+apache-airflow-providers-postgres

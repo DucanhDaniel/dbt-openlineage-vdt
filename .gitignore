@@ -36,3 +36,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+dbt-dags/ol_proxy/*.json
+dbt-dags/dbt_ingest.yaml

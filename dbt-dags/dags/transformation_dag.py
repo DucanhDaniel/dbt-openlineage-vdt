@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from airflow import DAG
-from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig, InvocationMode
+from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig, InvocationMode, RenderConfig
 from cosmos.profiles import PostgresUserPasswordProfileMapping
 from cosmos.operators.local import AbstractDbtLocalBase
 
@@ -314,6 +314,9 @@ with DAG(
         group_id="dbt_transform",
         project_config=ProjectConfig(DBT_PROJECT_PATH),
         profile_config=profile_config,
+        render_config=RenderConfig(
+            should_detach_multiple_parents_tests=True
+        ),
         operator_args={
             "install_deps": True, # Automatically runs `dbt deps` before running
         },

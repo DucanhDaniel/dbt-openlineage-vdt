@@ -2,15 +2,23 @@ services:
   scheduler:
     volumes:
       - ../dbt_openlineage:/usr/local/airflow/dags/dbt_openlineage:ro
+    extra_hosts:
+      - "localpg:host-gateway"
   dag-processor:
     volumes:
       - ../dbt_openlineage:/usr/local/airflow/dags/dbt_openlineage:ro
+    extra_hosts:
+      - "localpg:host-gateway"
   api-server:
     volumes:
       - ../dbt_openlineage:/usr/local/airflow/dags/dbt_openlineage:ro
+    extra_hosts:
+      - "localpg:host-gateway"
   triggerer:
     volumes:
       - ../dbt_openlineage:/usr/local/airflow/dags/dbt_openlineage:ro
+    extra_hosts:
+      - "localpg:host-gateway"
 
   marquez-db:
     image: postgres:14
@@ -46,6 +54,19 @@ services:
       - MARQUEZ_PORT=5000
     depends_on:
       - marquez
+
+  ol-proxy:
+    image: python:3.11-slim
+    command: >
+      bash -c "pip install flask requests && python /app/proxy.py"
+    volumes:
+      - ./ol_proxy:/app
+    ports:
+      - "5002:5002"
+    environment:
+      - MARQUEZ_URL=http://marquez:5000/api/v1/lineage
+      - OM_URL=http://103.102.131.30:8585/api/v1/openlineage/lineage
+      - OM_TOKEN=eyJraWQiOiJHYjM4OWEtOWY3Ni1nZGpzLWE5MmotMDI0MmJrOTQzNTYiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcGVuLW1ldGFkYXRhLm9yZyIsInN1YiI6ImluZ2VzdGlvbi1ib3QiLCJyb2xlcyI6WyJJbmdlc3Rpb25Cb3RSb2xlIl0sImVtYWlsIjoiaW5nZXN0aW9uLWJvdEBvcGVuLW1ldGFkYXRhLm9yZyIsImlzQm90Ijp0cnVlLCJ0b2tlblR5cGUiOiJCT1QiLCJ1c2VybmFtZSI6ImluZ2VzdGlvbi1ib3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJpbmdlc3Rpb24tYm90IiwiaWF0IjoxNzgxOTY5MjE4LCJleHAiOm51bGx9.zdWU3jIUtwj8nEshbujN6ql9BaDweY_6YoRg9wPu8VK-lC4gmnxCsFJ_zRZCkWQBe5kTzoCM33Q5-d3YOZnLRlJz_dMojnOMnNQoYFhdXKhhOu2Gw65kl7LvJd4d_PtLDe1nyuaHHBB7jGZVFypaAyRbwAnthHWCgzFxOmvmJPXfwJpxwER1WjnOib8kyiQOo8l6zSiAkVsYEVFBwyR4daTqojnmXW5ApfqhgotOmPPE3XJDwW0YU1B4MDOVznj7H7FqRShe2zTolLqieTFvnVz31wgf6eZHr3Ywa8SGOvYlOBDR_BhmprwoDIIOJ9HC-Cur7GhN5mcBvtX2RU-p0A
 
 volumes:
   marquez_postgres_data:
